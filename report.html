@@ -35,16 +35,39 @@
             <main class="content-body">
                 <div class="card max-width-md">
                     <form id="form-report-issue" class="interactive-form">
+                        <!-- New Field: Select Asset dynamically -->
+                        <div class="form-group">
+                            <label>Target Asset / Node</label>
+                            <select class="form-select" id="report-asset-select" required>
+                                <option value="" disabled selected>Select an asset...</option>
+                                <!-- JavaScript will load assets here dynamically -->
+                            </select>
+                        </div>
                         <div class="form-group">
                             <label>Incident Summary Title</label>
-                            <input type="text" class="form-input" placeholder="e.g. Server rack heating up fast" required>
+                            <input type="text" id="report-title" class="form-input" placeholder="e.g. Server rack heating up fast" required>
+                        </div>
+                        <!-- New Field: Category Dropdown -->
+                        <div class="form-group">
+                            <label>Incident Category</label>
+                            <select class="form-select" id="report-category" required>
+                                <option value="Hardware">Hardware / Server</option>
+                                <option value="Performance">Performance / Cooling</option>
+                                <option value="Electrical">Electrical / Power</option>
+                                <option value="Leakage">Leakage</option>
+                            </select>
                         </div>
                         <div class="form-group">
                             <label>Priority Matrix</label>
-                            <select class="form-select">
-                                <option value="low">Low - Routine</option>
-                                <option value="high">High - Urgent Node Loss</option>
+                            <select class="form-select" id="report-priority">
+                                <option value="Low">Low - Routine</option>
+                                <option value="High">High - Urgent Node Loss</option>
                             </select>
+                        </div>
+                        <!-- New Field: Description -->
+                        <div class="form-group">
+                            <label>Detailed Complaint Description</label>
+                            <textarea id="report-desc" class="form-input" rows="4" placeholder="Describe the physical failure or indicators..." required></textarea>
                         </div>
                         <div class="form-actions-end">
                             <button type="submit" class="btn btn-primary">Dispatch Incident Payload</button>
@@ -54,6 +77,8 @@
             </main>
         </div>
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="./report.js"></script>
 </body>
 </html>
