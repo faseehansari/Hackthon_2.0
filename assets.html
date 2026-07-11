@@ -7,6 +7,17 @@
     <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
     <link rel="stylesheet" href="./style.css">
     <link rel="stylesheet" href="./assets.css">
+    <style>
+        /* Modal Styles for UI Form Pop-up */
+        .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); justify-content: center; align-items: center; }
+        .modal-content { background-color: var(--bg-card, #fff); padding: 24px; border-radius: 8px; width: 100%; max-width: 450px; box-shadow: 0 4px 20px rgba(0,0,0,0.15); }
+        .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+        .close-btn { background: none; border: none; font-size: 24px; cursor: pointer; color: var(--text-muted); }
+        .form-group { margin-bottom: 16px; }
+        .form-group label { display: block; margin-bottom: 6px; font-weight: 500; }
+        .form-group input { width: 100%; padding: 10px; border: 1px solid var(--border-color, #ddd); border-radius: 6px; background: var(--bg-input, #fff); color: inherit; }
+        .flex-end { display: flex; justify-content: flex-end; gap: 10px; margin-top: 20px; }
+    </style>
 </head>
 <body>
     <div class="app-layout">
@@ -33,11 +44,15 @@
             </header>
 
             <main class="content-body">
-                <div class="table-filters-row card mb-16">
-                    <div class="global-search border-search">
+                <div class="table-filters-row card mb-16" style="display: flex; justify-content: space-between; align-items: center; gap: 16px;">
+                    <div class="global-search border-search" style="flex: 1;">
                         <i class="ri-search-line"></i>
                         <input type="text" id="asset-search-input" placeholder="Search assets by typing...">
                     </div>
+                    <!-- UI SE ASSET ADD KARNE KA BUTTON -->
+                    <button id="open-add-modal-btn" class="btn btn-primary" style="display: flex; align-items: center; gap: 8px; white-space: nowrap; padding: 10px 16px;">
+                        <i class="ri-add-line"></i> Add New Asset
+                    </button>
                 </div>
 
                 <div class="card">
@@ -52,14 +67,9 @@
                                     <th>QR View</th>
                                 </tr>
                             </thead>
-                            <tbody id="asset-table-body">
-                                <tr>
-                                    <td><strong>Edge Compute Node 01</strong></td>
-                                    <td><code>#AST-0092</code></td>
-                                    <td>Rack 4, Room Alpha</td>
-                                    <td><span class="badge badge-success">Operational</span></td>
-                                    <td><a href="details.html" class="btn btn-sm btn-outline"><i class="ri-qr-code-line"></i> View QR</a></td>
-                                </tr>
+                            <!-- Fixed ID (Matching JS) -->
+                            <tbody id="assets-table-body">
+                                <!-- Live Data Supabase Se Yahan Render Hoga -->
                             </tbody>
                         </table>
                     </div>
@@ -67,6 +77,34 @@
             </main>
         </div>
     </div>
+
+    <!-- UI INPUT FORM (MODAL POPOUP) -->
+    <div id="add-asset-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Add New Asset Node</h3>
+                <button id="close-modal-btn" class="close-btn">&times;</button>
+            </div>
+            <form id="form-add-asset">
+                <div class="form-group">
+                    <label for="asset-name">Asset Name</label>
+                    <input type="text" id="asset-name" placeholder="e.g., Core Router Linux" required>
+                </div>
+                <div class="form-group">
+                    <label for="asset-location">Location / Room</label>
+                    <input type="text" id="asset-location" placeholder="e.g., Rack 2, Zone B" required>
+                </div>
+                <div class="flex-end">
+                    <button type="button" id="cancel-modal-btn" class="btn btn-outline">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Add Asset</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Supabase JS Client CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <!-- Aapki assets.js file -->
+    <script src="./assets.js"></script>
 </body>
-<script src="./assets.js"></script>
 </html>

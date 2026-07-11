@@ -1,58 +1,106 @@
+// --- 1. SUPABASE CLIENT INITIALIZATION ---
+const SUPABASE_URL = 'https://rrwbwvbretpqncuqojgi.supabase.co'; 
+const SUPABASE_ANON_KEY = 'sb_publishable_q9iQPNkoLXYzOmdV7lUr_g_uPS5S-t1'; 
+
+const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
 document.addEventListener('DOMContentLoaded', () => {
-    // --- 1. THEME INITIALIZATION & TOGGLE ---
-    const themeToggleBtn = document.getElementById('theme-toggle');
-    const htmlElement = document.documentElement;
+    // --- 2. MODAL CONTROLS (OPEN / CLOSE FORM) ---
+    const modal = document.getElementById('add-asset-modal');
+    const openModalBtn = document.getElementById('open-add-modal-btn');
+    const closeModalBtn = document.getElementById('close-modal-btn');
+    const cancelModalBtn = document.getElementById('cancel-modal-btn');
 
-    const savedTheme = localStorage.getItem('theme') || 'light';
-    htmlElement.setAttribute('data-theme', savedTheme);
-    updateThemeIcon(savedTheme);
-
-    if (themeToggleBtn) {
-        themeToggleBtn.addEventListener('click', () => {
-            const currentTheme = htmlElement.getAttribute('data-theme');
-            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-            
-            htmlElement.setAttribute('data-theme', newTheme);
-            localStorage.setItem('theme', newTheme);
-            updateThemeIcon(newTheme);
-        });
+    if (openModalBtn && modal) {
+        openModalBtn.addEventListener('click', () => modal.style.display = 'flex');
     }
+    [closeModalBtn, cancelModalBtn].forEach(btn => {
+        if (btn) btn.addEventListener('click', () => modal.style.display = 'none');
+    });
 
-    function updateThemeIcon(theme) {
-        const icon = themeToggleBtn?.querySelector('i');
-        if (icon) {
-            if (theme === 'dark') {
-                icon.className = 'ri-sun-line';
-            } else {
-                icon.className = 'ri-moon-line';
+    // --- 3. UI SE NAYA ASSET ADD KARNA ---
+    const addAssetForm = document.getElementById('form-add-asset');
+
+    if (addAssetForm) {
+        addAssetForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const assetName = document.getElementById('asset-name').value;
+            const assetLocation = document.getElementById('asset-location').value;
+            const submitBtn = addAssetForm.querySelector('button[type="submit"]');
+
+            // Unique Asset Code generator (e.g., #AST-8472)
+            const randomCode = '#AST-' + Math.floor(1000 + Math.random() * 9000);
+
+            if (submitBtn) {
+                submitBtn.disabled = true;
+                submitBtn.textContent = 'Adding Asset...';
             }
-        }
-    }
 
-    // --- 2. LIVE SEARCH FILTERING ---
-    const searchInput = document.getElementById('asset-search-input');
-    const tableBody = document.getElementById('asset-table-body');
+            try {
+                const { error } = await supabaseClient
+                    .from('assets')
+                    .insert([{
+                        code: randomCode,
+                        name: assetName,
+                        location: assetLocation,
+                        status: 'Operational'
+                    }]);
 
-    if (searchInput && tableBody) {
-        searchInput.addEventListener('input', (e) => {
-            const searchTerm = e.target.value.toLowerCase().trim();
-            const rows = tableBody.getElementsByTagName('tr');
+                if (error) throw error;
 
-            for (let row of rows) {
-                // Table data cells extract kar rahe hain
-                const assetName = row.cells[0]?.textContent.toLowerCase() || '';
-                const assetCode = row.cells[1]?.textContent.toLowerCase() || '';
-                const assetLocation = row.cells[2]?.textContent.toLowerCase() || '';
+                modal.style.display = 'none'; // Form close karein
+                addAssetForm.reset();
+                loadAssetsTable(); // Live refresh table
 
-                // Matching logic
-                if (assetName.includes(searchTerm) || 
-                    assetCode.includes(searchTerm) || 
-                    assetLocation.includes(searchTerm)) {
-                    row.style.display = ''; // Show row
-                } else {
-                    row.style.display = 'none'; // Hide row
+            } catch (err) {
+                console.error('Failed to add asset:', err.message);
+                alert('Error adding asset: ' + err.message);
+            } finally {
+                if (submitBtn) {
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'Add Asset';
                 }
             }
         });
     }
+
+    // --- 4. DATABASE SE ASSETS FETCH KARKE TABLE MEIN DIKHANA ---
+    const assetsTableBody = document.getElementById('assets-table-body');
+
+    async function loadAssetsTable() {
+        if (!assetsTableBody) return;
+
+        try {
+            const { data: assets, error } = await supabaseClient
+                .from('assets')
+                .select('*')
+                .order('id', { ascending: false });
+
+            if (error) throw error;
+
+            assetsTableBody.innerHTML = '';
+
+            assets.forEach(asset => {
+                const row = document.createElement('tr');
+                
+                let statusClass = 'badge-success';
+                if (asset.status === 'Issue Reported') statusClass = 'badge-danger';
+
+                row.innerHTML = `
+                    <td><strong>${asset.name}</strong></td>
+                    <td><code>${asset.code}</code></td>
+                    <td>${asset.location}</td>
+                    <td><span class="badge ${statusClass}">${asset.status}</span></td>
+                    <td><a href="details.html" class="btn btn-sm btn-outline"><i class="ri-qr-code-line"></i> View QR</a></td>
+                `;
+                assetsTableBody.appendChild(row);
+            });
+
+        } catch (err) {
+            console.error('Error rendering assets table:', err.message);
+        }
+    }
+
+    loadAssetsTable();
 });
