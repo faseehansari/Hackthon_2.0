@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MaintainIQ | Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="./Dashboard.css">
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <div class="app-layout">
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo-area">
+                    <i class="ri-qr-code-line logo-icon"></i>
+                    <span class="logo-text">Maintain<span>IQ</span></span>
+                </div>
+            </div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li><a href="./Dashboard.html" class="nav-link active"><i class="ri-dashboard-line"></i> <span>Dashboard</span></a></li>
+                    <li><a href="./assets.html" class="nav-link"><i class="ri-server-line"></i> <span>Assets</span></a></li>
+                    <li><a href="./report.html" class="nav-link"><i class="ri-alert-line"></i> <span>Report Issue</span></a></li>
+                    <li><a href="./maintenance.html" class="nav-link"><i class="ri-tools-line"></i> <span>Maintenance</span></a></li>
+                    <li><a href="./settings.html" class="nav-link"><i class="ri-settings-4-line"></i> <span>Settings</span></a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- MAIN WORKSPACE -->
+        <div class="main-workspace">
+            <header class="top-navbar">
+                <div class="nav-left"><h2>Dashboard Summary</h2></div>
+                <div class="nav-right">
+                    <button id="theme-toggle" class="btn-icon"><i class="ri-moon-line"></i></button>
+                    <span class="user-name">Alex Carter</span>
+                </div>
+            </header>
+
+            <main class="content-body">
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <div class="metric-icon bg-primary-light"><i class="ri-server-line color-primary"></i></div>
+                        <div class="metric-info"><h3>1,248</h3><p>Total Assets</p></div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-icon bg-success-light"><i class="ri-checkbox-circle-line color-success"></i></div>
+                        <div class="metric-info"><h3>1,192</h3><p>Active Nodes</p></div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-icon bg-danger-light"><i class="ri-error-warning-line color-danger"></i></div>
+                        <div class="metric-info"><h3>24</h3><p>Open Tickets</p></div>
+                    </div>
+                </div>
+
+                <div class="card mt-24">
+                    <div class="card-header"><h3>Critical Active System Alerts</h3></div>
+                    <div class="table-responsive">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Asset ID</th>
+                                    <th>Asset Name</th>
+                                    <th>Priority</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>#AST-9021</strong></td>
+                                    <td>HVAC Unit 4B</td>
+                                    <td><span class="badge badge-danger">Critical</span></td>
+                                    <td><span class="badge badge-warning">Pending Review</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+    <script src="./Dashboard.js"></script>
+</body>
+</html>

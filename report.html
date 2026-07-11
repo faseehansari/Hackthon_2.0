@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MaintainIQ | Report Malfunction</title>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./report.css">
+</head>
+<body>
+    <div class="app-layout">
+        <!-- REUSED SIDEBAR -->
+        <aside class="sidebar">
+            <div class="sidebar-header"><div class="logo-area"><i class="ri-qr-code-line logo-icon"></i><span class="logo-text">Maintain<span>IQ</span></span></div></div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li><a href="./Dashboard.html" class="nav-link"><i class="ri-dashboard-line"></i> <span>Dashboard</span></a></li>
+                    <li><a href="./assets.html" class="nav-link"><i class="ri-server-line"></i> <span>Assets</span></a></li>
+                    <li><a href="./report.html" class="nav-link active"><i class="ri-alert-line"></i> <span>Report Issue</span></a></li>
+                    <li><a href="./maintenance.html" class="nav-link"><i class="ri-tools-line"></i> <span>Maintenance</span></a></li>
+                    <li><a href="./settings.html" class="nav-link"><i class="ri-settings-4-line"></i> <span>Settings</span></a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <div class="main-workspace">
+            <header class="top-navbar">
+                <div class="nav-left"><h2>Report System Malfunction</h2></div>
+                <div class="nav-right">
+                    <button id="theme-toggle" class="btn-icon"><i class="ri-moon-line"></i></button>
+                    <span class="user-name">Alex Carter</span>
+                </div>
+            </header>
+
+            <main class="content-body">
+                <div class="card max-width-md">
+                    <form id="form-report-issue" class="interactive-form">
+                        <div class="form-group">
+                            <label>Incident Summary Title</label>
+                            <input type="text" class="form-input" placeholder="e.g. Server rack heating up fast" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Priority Matrix</label>
+                            <select class="form-select">
+                                <option value="low">Low - Routine</option>
+                                <option value="high">High - Urgent Node Loss</option>
+                            </select>
+                        </div>
+                        <div class="form-actions-end">
+                            <button type="submit" class="btn btn-primary">Dispatch Incident Payload</button>
+                        </div>
+                    </form>
+                </div>
+            </main>
+        </div>
+    </div>
+    <script src="./report.js"></script>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MaintainIQ | Assets</title>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./assets.css">
+</head>
+<body>
+    <div class="app-layout">
+        <!-- REUSED SIDEBAR -->
+        <aside class="sidebar">
+            <div class="sidebar-header"><div class="logo-area"><i class="ri-qr-code-line logo-icon"></i><span class="logo-text">Maintain<span>IQ</span></span></div></div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li><a href="./Dashboard.html" class="nav-link"><i class="ri-dashboard-line"></i> <span>Dashboard</span></a></li>
+                    <li><a href="./assets.html" class="nav-link active"><i class="ri-server-line"></i> <span>Assets</span></a></li>
+                    <li><a href="./report.html" class="nav-link"><i class="ri-alert-line"></i> <span>Report Issue</span></a></li>
+                    <li><a href="./maintenance.html" class="nav-link"><i class="ri-tools-line"></i> <span>Maintenance</span></a></li>
+                    <li><a href="./settings.html" class="nav-link"><i class="ri-settings-4-line"></i> <span>Settings</span></a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <div class="main-workspace">
+            <header class="top-navbar">
+                <div class="nav-left"><h2>Asset Directory</h2></div>
+                <div class="nav-right">
+                    <button id="theme-toggle" class="btn-icon"><i class="ri-moon-line"></i></button>
+                    <span class="user-name">Alex Carter</span>
+                </div>
+            </header>
+
+            <main class="content-body">
+                <div class="table-filters-row card mb-16">
+                    <div class="global-search border-search">
+                        <i class="ri-search-line"></i>
+                        <input type="text" id="asset-search-input" placeholder="Search assets by typing...">
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="table-responsive">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Asset Name</th>
+                                    <th>Code</th>
+                                    <th>Location</th>
+                                    <th>Status</th>
+                                    <th>QR View</th>
+                                </tr>
+                            </thead>
+                            <tbody id="asset-table-body">
+                                <tr>
+                                    <td><strong>Edge Compute Node 01</strong></td>
+                                    <td><code>#AST-0092</code></td>
+                                    <td>Rack 4, Room Alpha</td>
+                                    <td><span class="badge badge-success">Operational</span></td>
+                                    <td><a href="details.html" class="btn btn-sm btn-outline"><i class="ri-qr-code-line"></i> View QR</a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+</body>
+<script src="./assets.js"></script>
+</html>

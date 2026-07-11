@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MaintainIQ | Asset Details</title>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./details.css">
+</head>
+<body>
+    <div class="app-layout">
+        <!-- REUSED SIDEBAR -->
+        <aside class="sidebar">
+            <div class="sidebar-header"><div class="logo-area"><i class="ri-qr-code-line logo-icon"></i><span class="logo-text">Maintain<span>IQ</span></span></div></div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li><a href="./Dashboard.html" class="nav-link"><i class="ri-dashboard-line"></i> <span>Dashboard</span></a></li>
+                    <li><a href="./assets.html" class="nav-link active"><i class="ri-server-line"></i> <span>Assets</span></a></li>
+                    <li><a href="./report.html" class="nav-link"><i class="ri-alert-line"></i> <span>Report Issue</span></a></li>
+                    <li><a href="./maintenance.html" class="nav-link"><i class="ri-tools-line"></i> <span>Maintenance</span></a></li>
+                    <li><a href="./settings.html" class="nav-link"><i class="ri-settings-4-line"></i> <span>Settings</span></a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <div class="main-workspace">
+            <header class="top-navbar">
+                <div class="nav-left"><h2>Passport Node: #AST-0092</h2></div>
+                <div class="nav-right">
+                    <button id="theme-toggle" class="btn-icon"><i class="ri-moon-line"></i></button>
+                    <span class="user-name">Alex Carter</span>
+                </div>
+            </header>
+
+            <main class="content-body">
+                <div class="dashboard-split-grid">
+                    <div class="card grid-span-2">
+                        <h3>Technical Passport Specs</h3>
+                        <div class="detail-info-grid mt-16">
+                            <div><label>Designation</label><p>Edge Compute Node 01</p></div>
+                            <div><label>Physical Location</label><p>Rack 4, Data Center Alpha</p></div>
+                            <div><label>Fitness State</label><p><span class="badge badge-success">Nominal</span></p></div>
+                        </div>
+                    </div>
+
+                    <div class="card text-center flex-center-vertical card-glass-glow">
+                        <h3>Secure QR Asset Tag</h3>
+                        <div class="qr-container-box mt-16">
+                            <div class="mock-qr-code">
+                                <div class="qr-corner qr-tl"></div>
+                                <div class="qr-corner qr-tr"></div>
+                                <div class="qr-corner qr-bl"></div>
+                            </div>
+                        </div>
+                        <button class="btn btn-sm btn-primary mt-16" id="btn-copy-asset-link"><i class="ri-links-line"></i> Copy Asset Link</button>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+    <script src="./details.js"></script>
+</body>
+</html>

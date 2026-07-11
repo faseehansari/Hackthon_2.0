@@ -1,0 +1,138 @@
+/* ==========================================================================
+   ASSET DETAILS SPECIFIC STYLES
+   ========================================================================== */
+
+/* 1. LAYOUT GRID SPACING */
+.dashboard-split-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+}
+
+.grid-span-2 {
+    grid-column: span 2;
+}
+
+/* 2. SPECIFICATION BLOCK */
+.detail-info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.detail-info-grid label {
+    display: block;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    margin-bottom: 6px;
+    letter-spacing: 0.5px;
+}
+
+.detail-info-grid p {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-main);
+}
+
+/* 3. MOCK QR CODE CONTAINER */
+.qr-container-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.mock-qr-code {
+    width: 160px;
+    height: 160px;
+    background-color: #ffffff;
+    border: 8px solid #ffffff;
+    border-radius: 12px;
+    position: relative;
+    box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.05);
+    background-image: 
+        radial-gradient(var(--text-main) 20%, transparent 20%),
+        radial-gradient(var(--text-main) 20%, transparent 20%);
+    background-size: 16px 16px;
+    background-position: 0 0, 8px 8px;
+}
+
+/* QR Code Structure Corners */
+.qr-corner {
+    position: absolute;
+    width: 36px;
+    height: 36px;
+    border: 8px solid var(--text-main);
+    background-color: #ffffff;
+}
+.qr-tl { top: 4px; left: 4px; }
+.qr-tr { top: 4px; right: 4px; }
+.qr-bl { bottom: 4px; left: 4px; }
+
+/* Glow Utilities */
+.card-glass-glow {
+    position: relative;
+    overflow: hidden;
+}
+
+/* 4. BUTTONS & UTILITIES */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    text-decoration: none;
+}
+
+.btn-sm {
+    padding: 8px 16px;
+    font-size: 13px;
+}
+
+.btn-primary {
+    background-color: var(--primary);
+    color: #ffffff;
+}
+
+.btn-primary:hover {
+    opacity: 0.9;
+}
+
+.text-center { text-align: center; }
+.flex-center-vertical {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.badge {
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.badge-success {
+    background-color: var(--success-light);
+    color: var(--success);
+}
+
+/* Responsive Handling */
+@media (max-width: 992px) {
+    .dashboard-split-grid {
+        grid-template-columns: 1fr;
+    }
+    .grid-span-2 {
+        grid-column: span 1;
+    }
+}
