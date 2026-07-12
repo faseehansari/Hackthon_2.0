@@ -32,6 +32,7 @@
                     <li><a href="./maintenance.html" class="nav-link"><i class="ri-tools-line"></i> <span>Maintenance</span></a></li>
                 </ul>
             </nav>
+    
         </aside>
 
         <!-- MAIN WORKSPACE -->
@@ -39,9 +40,15 @@
             <header class="top-navbar">
                 <div class="nav-left"><h2>Dashboard Summary</h2></div>
                 <div class="nav-right">
-                    <button id="theme-toggle" class="btn-icon"><i class="ri-moon-line"></i></button>
-                    <span class="user-name">Alex Carter</span>
-                </div>
+    <!-- Theme Toggle Button -->
+    <button id="theme-toggle" class="btn-icon"><i class="ri-moon-line"></i></button>
+    
+    <!-- 🚪 Logout Button (Bina user name ke) -->
+    <button id="btn-logout-id" class="btn-logout">
+        <i class="ri-logout-box-r-line"></i>
+        <span>Logout</span>
+    </button>
+</div>
             </header>
 
             <main class="content-body">
@@ -92,5 +99,6 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <!-- Your Dashboard.js file -->
     <script src="./Dashboard.js"></script>
+    <script src="./logout.js"></script>
 </body>
 </html>
