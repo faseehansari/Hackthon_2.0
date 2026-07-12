@@ -7,6 +7,21 @@
     <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
     <link rel="stylesheet" href="./style.css">
     <link rel="stylesheet" href="./details.css">
+    <style>
+        /* QR Code wrapper layout styling */
+        #qr-code-output {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 16px;
+            background: #fff;
+            border-radius: 8px;
+            display: inline-block;
+        }
+        #qr-code-output img {
+            display: block;
+        }
+    </style>
 </head>
 <body>
     <div class="app-layout">
@@ -25,7 +40,8 @@
 
         <div class="main-workspace">
             <header class="top-navbar">
-                <div class="nav-left"><h2>Passport Node: #AST-0092</h2></div>
+                <!-- ID Added for Header Code -->
+                <div class="nav-left"><h2 id="asset-header-code">Passport Node: Loading...</h2></div>
                 <div class="nav-right">
                     <button id="theme-toggle" class="btn-icon"><i class="ri-moon-line"></i></button>
                     <span class="user-name">Alex Carter</span>
@@ -37,20 +53,18 @@
                     <div class="card grid-span-2">
                         <h3>Technical Passport Specs</h3>
                         <div class="detail-info-grid mt-16">
-                            <div><label>Designation</label><p>Edge Compute Node 01</p></div>
-                            <div><label>Physical Location</label><p>Rack 4, Data Center Alpha</p></div>
-                            <div><label>Fitness State</label><p><span class="badge badge-success">Nominal</span></p></div>
+                            <!-- IDs Added for Name, Location & Status -->
+                            <div><label>Designation</label><p id="asset-name">Loading...</p></div>
+                            <div><label>Physical Location</label><p id="asset-location">Loading...</p></div>
+                            <div><label>Fitness State</label><p><span id="asset-status" class="badge">Loading...</span></p></div>
                         </div>
                     </div>
 
                     <div class="card text-center flex-center-vertical card-glass-glow">
                         <h3>Secure QR Asset Tag</h3>
                         <div class="qr-container-box mt-16">
-                            <div class="mock-qr-code">
-                                <div class="qr-corner qr-tl"></div>
-                                <div class="qr-corner qr-tr"></div>
-                                <div class="qr-corner qr-bl"></div>
-                            </div>
+                            <!-- Replaced static mockup with dynamic output container -->
+                            <div id="qr-code-output"></div>
                         </div>
                         <button class="btn btn-sm btn-primary mt-16" id="btn-copy-asset-link"><i class="ri-links-line"></i> Copy Asset Link</button>
                     </div>
@@ -58,6 +72,12 @@
             </main>
         </div>
     </div>
+
+    <!-- Supabase JS Client CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <!-- QR Code Generator Library CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <!-- Your details.js file -->
     <script src="./details.js"></script>
 </body>
 </html>

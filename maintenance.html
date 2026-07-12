@@ -7,6 +7,17 @@
     <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
     <link rel="stylesheet" href="./style.css">
     <link rel="stylesheet" href="./maintenance.css">
+    <style>
+        /* Custom styles to ensure layout looks beautiful */
+        .mb-16 { margin-bottom: 16px; }
+        .data-table { width: 100%; border-collapse: collapse; margin-top: 12px; text-align: left; }
+        .data-table th, .data-table td { padding: 12px; border-bottom: 1px solid var(--border-color, #eee); }
+        .badge { padding: 4px 8px; border-radius: 4px; font-size: 12px; font-weight: 600; display: inline-block; }
+        .badge-danger { background-color: #ffebee; color: #c62828; }
+        .badge-warning { background-color: #fff3e0; color: #ef6c00; }
+        .badge-success { background-color: #e8f5e9; color: #2e7d32; }
+        .form-select { width: 100%; padding: 10px; border: 1px solid var(--border-color, #ccc); border-radius: 6px; background: var(--bg-card, #fff); color: inherit; margin-top: 6px; }
+    </style>
 </head>
 <body>
     <div class="app-layout">
@@ -33,19 +44,62 @@
             </header>
 
             <main class="content-body">
+                <!-- NAYI INCIDENTS TABLE CARD (ADDED HERE) -->
+                <div class="card mb-16">
+                    <h3>Active Incidents & Tickets</h3>
+                    <div class="table-responsive">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Ticket Title</th>
+                                    <th>Category</th>
+                                    <th>Priority</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tickets-table-body">
+                                <tr>
+                                    <td colspan="5" style="text-align:center; color: var(--text-muted);">Loading active database logs...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- RESOLUTION FORM CARD (UPDATED FORM AND IDs) -->
                 <div class="card">
                     <h3>Resolution Engine Logs</h3>
-                    <form class="interactive-form mt-16" onsubmit="event.preventDefault(); alert('Logged successfully.');">
+                    <form id="form-update-maintenance" class="interactive-form mt-16">
+                        <!-- Hidden input to track selected ticket ID -->
+                        <input type="hidden" id="selected-ticket-id">
+                        
                         <div class="form-group">
-                            <label>Engineering Field Diagnosis Notes</label>
-                            <textarea class="form-input" rows="4" placeholder="Log physical updates..." required></textarea>
+                            <label id="selected-ticket-label" style="font-weight: 600; color: #3b82f6;">👉 Select a ticket from the table above to start updates</label>
                         </div>
-                        <button type="submit" class="btn btn-success">Update Overhaul Status</button>
+
+                        <div class="form-group" style="margin-top: 16px;">
+                            <label for="maintenance-status">Update Overhaul Status</label>
+                            <select id="maintenance-status" class="form-select" disabled required>
+                                <option value="Reported">Reported</option>
+                                <option value="Under Review">Under Review</option>
+                                <option value="Resolved">Resolved</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group" style="margin-top: 16px;">
+                            <label for="diagnosis-notes">Engineering Field Diagnosis Notes</label>
+                            <textarea id="diagnosis-notes" class="form-input" rows="4" placeholder="Log physical updates..." disabled required></textarea>
+                        </div>
+                        
+                        <button type="submit" id="btn-update-status" class="btn btn-success" style="margin-top: 16px;" disabled>Update Overhaul Status</button>
                     </form>
                 </div>
             </main>
         </div>
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="./maintenance.js"></script>
 </body>
 </html>

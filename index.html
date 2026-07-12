@@ -7,6 +7,12 @@
     <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
     <link rel="stylesheet" href="./Dashboard.css">
     <link rel="stylesheet" href="./style.css">
+    <style>
+        .badge { padding: 4px 8px; border-radius: 4px; font-size: 12px; font-weight: 600; display: inline-block; }
+        .badge-danger { background-color: #ffebee; color: #c62828; }
+        .badge-warning { background-color: #fff3e0; color: #ef6c00; }
+        .badge-success { background-color: #e8f5e9; color: #2e7d32; }
+    </style>
 </head>
 <body>
     <div class="app-layout">
@@ -42,15 +48,18 @@
                 <div class="metrics-grid">
                     <div class="metric-card">
                         <div class="metric-icon bg-primary-light"><i class="ri-server-line color-primary"></i></div>
-                        <div class="metric-info"><h3>1,248</h3><p>Total Assets</p></div>
+                        <!-- ID Added for Total Assets Counter -->
+                        <div class="metric-info"><h3 id="count-total-assets">...</h3><p>Total Assets</p></div>
                     </div>
                     <div class="metric-card">
                         <div class="metric-icon bg-success-light"><i class="ri-checkbox-circle-line color-success"></i></div>
-                        <div class="metric-info"><h3>1,192</h3><p>Active Nodes</p></div>
+                        <!-- ID Added for Active Nodes Counter -->
+                        <div class="metric-info"><h3 id="count-active-nodes">...</h3><p>Active Nodes</p></div>
                     </div>
                     <div class="metric-card">
                         <div class="metric-icon bg-danger-light"><i class="ri-error-warning-line color-danger"></i></div>
-                        <div class="metric-info"><h3>24</h3><p>Open Tickets</p></div>
+                        <!-- ID Added for Open Tickets Counter -->
+                        <div class="metric-info"><h3 id="count-open-tickets">...</h3><p>Open Tickets</p></div>
                     </div>
                 </div>
 
@@ -61,17 +70,15 @@
                             <thead>
                                 <tr>
                                     <th>Asset ID</th>
-                                    <th>Asset Name</th>
+                                    <th>Ticket Title</th>
                                     <th>Priority</th>
                                     <th>Status</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <!-- Dynamic Table Body ID -->
+                            <tbody id="dashboard-alerts-body">
                                 <tr>
-                                    <td><strong>#AST-9021</strong></td>
-                                    <td>HVAC Unit 4B</td>
-                                    <td><span class="badge badge-danger">Critical</span></td>
-                                    <td><span class="badge badge-warning">Pending Review</span></td>
+                                    <td colspan="4" style="text-align:center; color: var(--text-muted);">Loading active system alerts...</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -80,6 +87,10 @@
             </main>
         </div>
     </div>
+    
+    <!-- Supabase JS Client CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <!-- Your Dashboard.js file -->
     <script src="./Dashboard.js"></script>
 </body>
 </html>

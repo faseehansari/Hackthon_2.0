@@ -87,12 +87,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 let statusClass = 'badge-success';
                 if (asset.status === 'Issue Reported') statusClass = 'badge-danger';
 
+                // UPDATE: Yahan href ko dynamic bana diya hai taake URL mein code chala jaye
                 row.innerHTML = `
                     <td><strong>${asset.name}</strong></td>
                     <td><code>${asset.code}</code></td>
                     <td>${asset.location}</td>
                     <td><span class="badge ${statusClass}">${asset.status}</span></td>
-                    <td><a href="details.html" class="btn btn-sm btn-outline"><i class="ri-qr-code-line"></i> View QR</a></td>
+                    <td><a href="details.html?code=${encodeURIComponent(asset.code)}" class="btn btn-sm btn-outline"><i class="ri-qr-code-line"></i> View QR</a></td>
                 `;
                 assetsTableBody.appendChild(row);
             });
