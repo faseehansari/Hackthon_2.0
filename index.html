@@ -3,94 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MaintainIQ | Dashboard</title>
+    <title>MaintainIQ | Login</title>
     <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
-    <link rel="stylesheet" href="./Dashboard.css">
     <link rel="stylesheet" href="./style.css">
     <style>
-        .badge { padding: 4px 8px; border-radius: 4px; font-size: 12px; font-weight: 600; display: inline-block; }
-        .badge-danger { background-color: #ffebee; color: #c62828; }
-        .badge-warning { background-color: #fff3e0; color: #ef6c00; }
-        .badge-success { background-color: #e8f5e9; color: #2e7d32; }
+        .login-container { height: 100vh; display: flex; justify-content: center; align-items: center; background: #f4f6f9; }
+        .login-card { background: #fff; padding: 32px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); width: 100%; max-width: 400px; text-align: center; }
+        .login-logo { font-size: 28px; font-weight: bold; color: #1e3a8a; margin-bottom: 24px; display: flex; justify-content: center; align-items: center; gap: 8px; }
+        .login-logo span { color: #3b82f6; }
+        .btn-login { width: 100%; padding: 12px; background: #3b82f6; color: white; border: none; border-radius: 6px; font-size: 16px; font-weight: 600; cursor: pointer; margin-top: 24px; transition: 0.2s; }
+        .btn-login:hover { background: #2563eb; }
     </style>
 </head>
 <body>
-    <div class="app-layout">
-        <!-- SIDEBAR -->
-        <aside class="sidebar">
-            <div class="sidebar-header">
-                <div class="logo-area">
-                    <i class="ri-qr-code-line logo-icon"></i>
-                    <span class="logo-text">Maintain<span>IQ</span></span>
+    <div class="login-container">
+        <div class="login-card">
+            <div class="login-logo"><i class="ri-qr-code-line"></i> Maintain<span>IQ</span></div>
+            <h3>Portal Login</h3>
+            <p style="color: #666; margin-bottom: 24px;">Enter your database credentials</p>
+            
+            <form id="form-login">
+                <div style="text-align: left; margin-bottom: 16px;">
+                    <label style="font-weight: 600;">Email Address</label>
+                    <input type="email" id="login-email" class="form-input" style="width:100%; padding:10px; margin-top:6px;" placeholder="name@maintainiq.com" required>
                 </div>
-            </div>
-            <nav class="sidebar-nav">
-                <ul>
-                    <li><a href="./index.html" class="nav-link active"><i class="ri-dashboard-line"></i> <span>Dashboard</span></a></li>
-                    <li><a href="./assets.html" class="nav-link"><i class="ri-server-line"></i> <span>Assets</span></a></li>
-                    <li><a href="./report.html" class="nav-link"><i class="ri-alert-line"></i> <span>Report Issue</span></a></li>
-                    <li><a href="./maintenance.html" class="nav-link"><i class="ri-tools-line"></i> <span>Maintenance</span></a></li>
-                </ul>
-            </nav>
-        </aside>
-
-        <!-- MAIN WORKSPACE -->
-        <div class="main-workspace">
-            <header class="top-navbar">
-                <div class="nav-left"><h2>Dashboard Summary</h2></div>
-                <div class="nav-right">
-                    <button id="theme-toggle" class="btn-icon"><i class="ri-moon-line"></i></button>
-                    <span class="user-name">Alex Carter</span>
+                <div style="text-align: left; margin-bottom: 16px;">
+                    <label style="font-weight: 600;">Password</label>
+                    <input type="password" id="login-password" class="form-input" style="width:100%; padding:10px; margin-top:6px;" placeholder="••••••••" required>
                 </div>
-            </header>
-
-            <main class="content-body">
-                <div class="metrics-grid">
-                    <div class="metric-card">
-                        <div class="metric-icon bg-primary-light"><i class="ri-server-line color-primary"></i></div>
-                        <!-- ID Added for Total Assets Counter -->
-                        <div class="metric-info"><h3 id="count-total-assets">...</h3><p>Total Assets</p></div>
-                    </div>
-                    <div class="metric-card">
-                        <div class="metric-icon bg-success-light"><i class="ri-checkbox-circle-line color-success"></i></div>
-                        <!-- ID Added for Active Nodes Counter -->
-                        <div class="metric-info"><h3 id="count-active-nodes">...</h3><p>Active Nodes</p></div>
-                    </div>
-                    <div class="metric-card">
-                        <div class="metric-icon bg-danger-light"><i class="ri-error-warning-line color-danger"></i></div>
-                        <!-- ID Added for Open Tickets Counter -->
-                        <div class="metric-info"><h3 id="count-open-tickets">...</h3><p>Open Tickets</p></div>
-                    </div>
-                </div>
-
-                <div class="card mt-24">
-                    <div class="card-header"><h3>Critical Active System Alerts</h3></div>
-                    <div class="table-responsive">
-                        <table class="data-table">
-                            <thead>
-                                <tr>
-                                    <th>Asset ID</th>
-                                    <th>Ticket Title</th>
-                                    <th>Priority</th>
-                                    <th>Status</th>
-                                </tr>
-                            </thead>
-                            <!-- Dynamic Table Body ID -->
-                            <tbody id="dashboard-alerts-body">
-                                <tr>
-                                    <td colspan="4" style="text-align:center; color: var(--text-muted);">Loading active system alerts...</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </main>
+                <button type="submit" id="btn-login-submit" class="btn-login">Secure Login</button>
+            </form>
         </div>
     </div>
-    
-    <!-- Supabase JS Client CDN -->
+
+    <!-- Supabase CDN Client -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <!-- Your Dashboard.js file -->
-    <script src="./Dashboard.js"></script>
+    <script src="./app.js"></script>
 </body>
 </html>

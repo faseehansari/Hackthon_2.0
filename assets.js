@@ -1,3 +1,9 @@
+// Strict Admin Guard
+const currentRole = localStorage.getItem('userRole');
+if (currentRole !== 'admin') {
+    alert('Access Denied! Only Admin can access this page.');
+    window.location.href = './index.html';
+}
 // --- 1. SUPABASE CLIENT INITIALIZATION ---
 const SUPABASE_URL = 'https://rrwbwvbretpqncuqojgi.supabase.co'; 
 const SUPABASE_ANON_KEY = 'sb_publishable_q9iQPNkoLXYzOmdV7lUr_g_uPS5S-t1'; 

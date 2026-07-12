@@ -1,3 +1,9 @@
+// User and Admin Guard
+const currentRole = localStorage.getItem('userRole');
+if (currentRole !== 'user' && currentRole !== 'admin') {
+    alert('Access Denied! You do not have permission to view this page.');
+    window.location.href = './index.html';
+}
 // --- 1. SUPABASE CLIENT INITIALIZATION ---
 const SUPABASE_URL = 'https://rrwbwvbretpqncuqojgi.supabase.co'; 
 const SUPABASE_ANON_KEY = 'sb_publishable_q9iQPNkoLXYzOmdV7lUr_g_uPS5S-t1'; 
